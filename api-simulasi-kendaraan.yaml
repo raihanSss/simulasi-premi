@@ -1,0 +1,360 @@
+openapi: 3.0.3
+info:
+  title: Simulasi Premi Kendaraan — PT Asuransi Intra Asia
+  description: |
+    API kalkulasi estimasi premi asuransi kendaraan bermotor berdasarkan tarif OJK (SE OJK No. 6/SEOJK.05/2017).
+
+    **Catatan:** Hasil bersifat indikatif. Premi final dapat berbeda sesuai survei dan kebijakan underwriting.
+  version: 1.0.0
+  contact:
+    name: PT Asuransi Intra Asia
+    url: https://www.intraasia.id
+
+servers:
+  - url: http://localhost/intraasia_new
+    description: Local XAMPP
+
+paths:
+  /api-simulasi-kendaraan.php:
+    post:
+      summary: Hitung estimasi premi kendaraan
+      description: |
+        Menghitung premi dasar, surcharge komersial, dan benefit tambahan berdasarkan tarif OJK.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulasiRequest'
+            examples:
+              non_bus_comprehensive:
+                summary: Non Bus/Truck — Comprehensive dengan flood & bengkel resmi
+                value:
+                  tipe_kendaraan: non-bus-non-truck
+                  region: region2
+                  harga_pasar: 300000000
+                  tipe_asuransi: Comprehensive
+                  pilihan_rate: bawah
+                  kegunaan: non-komersial
+                  benefits:
+                    - flood-hurricane
+                    - authorized
+              motor_tlo:
+                summary: Motor — TLO Region 1
+                value:
+                  tipe_kendaraan: motor
+                  region: region1
+                  harga_pasar: 25000000
+                  tipe_asuransi: TLO
+                  pilihan_rate: bawah
+                  kegunaan: non-komersial
+                  benefits: []
+              komersial_dengan_pa:
+                summary: Non Bus/Truck Komersial + PA Driver + Liability
+                value:
+                  tipe_kendaraan: non-bus-non-truck
+                  region: region3
+                  harga_pasar: 200000000
+                  tipe_asuransi: Comprehensive
+                  pilihan_rate: atas
+                  kegunaan: komersial
+                  kapasitas_penumpang: 4
+                  pa_driver_price: 100000000
+                  pa_passenger_price: 50000000
+                  third_party_price: 50000000
+                  benefits:
+                    - personal-accident-driver
+                    - personal-accident-passenger
+                    - liability
+                    - strike-riot
+                    - terrorism-sabotage
+              truck_full_benefit:
+                summary: Truk & Pick Up — TLO Rate Atas + semua benefit
+                value:
+                  tipe_kendaraan: truck-pickup
+                  region: region2
+                  harga_pasar: 500000000
+                  tipe_asuransi: TLO
+                  pilihan_rate: atas
+                  kegunaan: komersial
+                  kapasitas_penumpang: 2
+                  pa_driver_price: 75000000
+                  pa_passenger_price: 50000000
+                  third_party_price: 100000000
+                  benefits:
+                    - flood-hurricane
+                    - earthquake-tsunami
+                    - strike-riot
+                    - terrorism-sabotage
+                    - personal-accident-driver
+                    - personal-accident-passenger
+                    - liability
+      responses:
+        '200':
+          description: Kalkulasi berhasil
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulasiResponse'
+        '422':
+          description: Validasi gagal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method tidak diizinkan (harus POST)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    SimulasiRequest:
+      type: object
+      required:
+        - tipe_kendaraan
+        - region
+        - harga_pasar
+        - tipe_asuransi
+      properties:
+        tipe_kendaraan:
+          type: string
+          enum: [non-bus-non-truck, truck-pickup, bus, motor]
+          description: Jenis kendaraan
+          example: non-bus-non-truck
+        brand_kendaraan:
+          type: string
+          description: Merek/brand kendaraan (opsional, tidak mempengaruhi kalkulasi)
+          example: Toyota
+        tahun_kendaraan:
+          type: string
+          description: Tahun pembuatan kendaraan (opsional)
+          example: "2022"
+        kapasitas_penumpang:
+          type: integer
+          minimum: 0
+          description: Jumlah seat penumpang (digunakan untuk PA Penumpang)
+          example: 4
+        region:
+          type: string
+          enum: [region1, region2, region3]
+          description: |
+            Wilayah kendaraan:
+            - `region1`: Sumatera
+            - `region2`: Jakarta, Banten, Jawa Barat
+            - `region3`: Lainnya
+          example: region2
+        kegunaan:
+          type: string
+          enum: [non-komersial, komersial]
+          default: non-komersial
+          description: Kegunaan kendaraan. Komersial dikenakan surcharge 25%
+          example: non-komersial
+        tipe_asuransi:
+          type: string
+          enum: [TLO, Comprehensive]
+          description: Tipe perlindungan asuransi
+          example: Comprehensive
+        pilihan_rate:
+          type: string
+          enum: [bawah, atas]
+          default: bawah
+          description: Pilihan tarif OJK (bawah = rate minimum, atas = rate maksimum)
+          example: bawah
+        harga_pasar:
+          type: integer
+          minimum: 1
+          description: Harga pasar kendaraan dalam Rupiah
+          example: 300000000
+        pa_driver_price:
+          type: integer
+          minimum: 0
+          description: Uang pertanggungan PA Pengemudi (Rupiah). Wajib jika benefit personal-accident-driver dipilih
+          example: 100000000
+        pa_passenger_price:
+          type: integer
+          minimum: 0
+          description: Uang pertanggungan PA Penumpang per seat (Rupiah). Wajib jika benefit personal-accident-passenger dipilih
+          example: 50000000
+        third_party_price:
+          type: integer
+          minimum: 0
+          description: Uang pertanggungan Tanggung Jawab Pihak Ketiga (Rupiah). Wajib jika benefit liability dipilih
+          example: 50000000
+        benefits:
+          type: array
+          items:
+            type: string
+            enum:
+              - flood-hurricane
+              - earthquake-tsunami
+              - strike-riot
+              - terrorism-sabotage
+              - personal-accident-driver
+              - personal-accident-passenger
+              - liability
+              - authorized
+          description: |
+            Daftar benefit tambahan:
+            - `flood-hurricane`: Banjir, Angin Topan & Badai
+            - `earthquake-tsunami`: Gempa Bumi & Tsunami
+            - `strike-riot`: Mogok, Kerusuhan, Huru Hara
+            - `terrorism-sabotage`: Terorisme & Sabotase
+            - `personal-accident-driver`: Kecelakaan Diri Pengemudi (butuh `pa_driver_price`)
+            - `personal-accident-passenger`: Kecelakaan Diri Penumpang (butuh `pa_passenger_price` & `kapasitas_penumpang`)
+            - `liability`: Tanggung Jawab Hukum Pihak Ketiga (butuh `third_party_price`)
+            - `authorized`: Bengkel Resmi (5% dari premi dasar)
+          example:
+            - flood-hurricane
+            - authorized
+
+    SimulasiResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        input:
+          type: object
+          description: Ringkasan parameter yang diproses
+          properties:
+            tipe_kendaraan:
+              type: string
+              example: non-bus-non-truck
+            tipe_kendaraan_label:
+              type: string
+              example: Non Bus & Non Truck
+            brand_kendaraan:
+              type: string
+              example: Toyota
+            tahun_kendaraan:
+              type: string
+              example: "2022"
+            kapasitas_penumpang:
+              type: integer
+              example: 4
+            region:
+              type: string
+              example: region2
+            region_label:
+              type: string
+              example: Region 2 (Jakarta, Banten, Jawa Barat)
+            kegunaan:
+              type: string
+              example: non-komersial
+            tipe_asuransi:
+              type: string
+              example: Comprehensive
+            pilihan_rate:
+              type: string
+              example: bawah
+            harga_pasar:
+              type: integer
+              example: 300000000
+            pa_driver_price:
+              type: integer
+              example: 0
+            pa_passenger_price:
+              type: integer
+              example: 0
+            third_party_price:
+              type: integer
+              example: 0
+            benefits:
+              type: array
+              items:
+                type: string
+              example: [flood-hurricane, authorized]
+        result:
+          type: object
+          properties:
+            ojk_rate_pct:
+              type: number
+              description: Rate OJK yang digunakan (%)
+              example: 2.08
+            premi_dasar:
+              type: number
+              description: Premi dasar (Rupiah)
+              example: 6240000
+            surcharge_komersial:
+              type: number
+              description: Surcharge komersial 25% dari premi dasar (0 jika non-komersial)
+              example: 0
+            benefit_rows:
+              type: array
+              items:
+                $ref: '#/components/schemas/BenefitRow'
+            premi_benefit:
+              type: number
+              description: Total premi dari semua benefit tambahan (Rupiah)
+              example: 612000
+            biaya_admin:
+              type: number
+              description: Biaya administrasi (saat ini 0)
+              example: 0
+            total_premi:
+              type: number
+              description: Total premi per tahun (Rupiah)
+              example: 6852000
+            total_premi_per:
+              type: string
+              example: tahun
+        meta:
+          type: object
+          properties:
+            referensi:
+              type: string
+              example: SE OJK No. 6/SEOJK.05/2017
+            catatan:
+              type: string
+              example: Estimasi indikatif. Premi final dapat berbeda sesuai survei dan kebijakan underwriting.
+            timestamp:
+              type: string
+              format: date-time
+              example: "2026-06-09T10:00:00+07:00"
+
+    BenefitRow:
+      type: object
+      properties:
+        id:
+          type: string
+          example: flood-hurricane
+        label:
+          type: string
+          example: Banjir, Angin Topan & Badai
+        rate:
+          type: number
+          nullable: true
+          description: Rate yang digunakan (null untuk liability karena progresif)
+          example: 0.075
+        formula:
+          type: string
+          example: "0.075% × Rp 300.000.000"
+        amount:
+          type: number
+          description: Premi benefit ini (Rupiah)
+          example: 225000
+        note:
+          type: string
+          example: ""
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          description: Pesan error (untuk 405)
+          example: Method not allowed. Use POST.
+        errors:
+          type: array
+          description: Daftar error validasi (untuk 422)
+          items:
+            type: string
+          example:
+            - tipe_kendaraan wajib diisi
+            - harga_pasar wajib diisi dan harus lebih dari 0
