@@ -1,0 +1,256 @@
+2026-06-10 11:09:45 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-10 11:09:45 [DEBUG] Registering handler for ListToolsRequest
+2026-06-10 11:09:45 [DEBUG] Registering handler for CallToolRequest
+2026-06-10 11:09:45 [DEBUG] Using proactor: IocpProactor
+2026-06-10 11:09:45 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-10 11:16:24 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-10 11:16:24 [DEBUG] Registering handler for ListToolsRequest
+2026-06-10 11:16:24 [DEBUG] Registering handler for CallToolRequest
+2026-06-10 11:16:24 [DEBUG] Using proactor: IocpProactor
+2026-06-10 11:16:24 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-10 11:20:06 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-10 11:20:06 [DEBUG] Registering handler for ListToolsRequest
+2026-06-10 11:20:06 [DEBUG] Registering handler for CallToolRequest
+2026-06-10 11:20:06 [DEBUG] Using proactor: IocpProactor
+2026-06-10 11:20:06 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-10 11:20:06 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-10 11:20:06 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x000002438AB79090>
+2026-06-10 11:20:06 [INFO] Processing request of type ListToolsRequest
+2026-06-10 11:20:06 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-10 11:20:06 [DEBUG] Response sent
+2026-06-10 11:22:55 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x000002438AB78690>
+2026-06-10 11:22:55 [INFO] Processing request of type CallToolRequest
+2026-06-10 11:22:55 [DEBUG] Dispatching request of type CallToolRequest
+2026-06-10 11:22:55 [INFO] Request payload: {"benefits": ["flood-hurricane"], "pa_driver_price": 0, "pa_passenger_price": 0, "third_party_price": 0, "tipe_kendaraan": "non-bus-non-truck", "region": "region2", "harga_pasar": 300000000, "tipe_asuransi": "TLO", "pilihan_rate": "atas", "kegunaan": "non-komersial"}
+2026-06-10 11:22:57 [DEBUG] connect_tcp.started host='localhost' port=8080 local_address=None timeout=10.0 socket_options=None
+2026-06-10 11:22:57 [DEBUG] connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000002438ABB3CB0>
+2026-06-10 11:22:57 [DEBUG] send_request_headers.started request=<Request [b'POST']>
+2026-06-10 11:22:57 [DEBUG] send_request_headers.complete
+2026-06-10 11:22:57 [DEBUG] send_request_body.started request=<Request [b'POST']>
+2026-06-10 11:22:57 [DEBUG] send_request_body.complete
+2026-06-10 11:22:57 [DEBUG] receive_response_headers.started request=<Request [b'POST']>
+2026-06-10 11:22:57 [DEBUG] receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 04:22:57 GMT'), (b'Server', b'Apache/2.4.25 (Win32) OpenSSL/1.0.2j PHP/5.6.30'), (b'X-Powered-By', b'PHP/5.6.30'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'POST, OPTIONS'), (b'Access-Control-Allow-Headers', b'Content-Type'), (b'Content-Length', b'1519'), (b'Keep-Alive', b'timeout=5, max=100'), (b'Connection', b'Keep-Alive'), (b'Content-Type', b'application/json')])
+2026-06-10 11:22:57 [INFO] HTTP Request: POST http://localhost:8080/intraasia_new/api-simulasi-kendaraan.php "HTTP/1.1 200 OK"
+2026-06-10 11:22:57 [DEBUG] receive_response_body.started request=<Request [b'POST']>
+2026-06-10 11:22:57 [DEBUG] receive_response_body.complete
+2026-06-10 11:22:57 [DEBUG] response_closed.started
+2026-06-10 11:22:57 [DEBUG] response_closed.complete
+2026-06-10 11:22:57 [INFO] Response status: 200
+2026-06-10 11:22:57 [DEBUG] Response body: {
+    "success": true,
+    "input": {
+        "tipe_kendaraan": "non-bus-non-truck",
+        "tipe_kendaraan_label": "Non Bus & Non Truck",
+        "brand_kendaraan": "",
+        "tahun_kendaraan": "",
+        "kapasitas_penumpang": 0,
+        "region": "region2",
+        "region_label": "Region 2 (Jakarta, Banten, Jawa Barat)",
+        "kegunaan": "non-komersial",
+        "tipe_asuransi": "TLO",
+        "pilihan_rate": "atas",
+        "harga_pasar": 300000000,
+        "pa_driver_price": 0,
+        "pa_passenger_price": 0,
+        "third_party_price": 0,
+        "benefits": [
+            "flood-hurricane"
+        ]
+    },
+    "result": {
+        "ojk_rate_pct": 0.42,
+        "premi_dasar": 1260000,
+        "surcharge_komersial": 0,
+        "benefit_rows": [
+            {
+                "id": "flood-hurricane",
+                "label": "Banjir, Angin Topan & Badai",
+                "rate": 0.075,
+                "formula": "0.075% × Rp 300.000.000",
+                "amount": 225000,
+                "note": "Risiko sendiri banjir: min. 10% dari nilai klaim, minimum Rp500.000 per kejadian (SE OJK No. 6\/2017)."
+            }
+        ],
+        "premi_benefit": 225000,
+        "biaya_admin": 0,
+        "total_premi": 1485000,
+        "total_premi_per": "tahun"
+    },
+    "meta": {
+        "referensi": "SE OJK No. 6\/SEOJK.05\/2017",
+        "catatan": "Estimasi indikatif. Premi final dapat berbeda sesuai survei dan kebijakan underwriting.",
+        "timestamp": "2026-06-10T06:22:57+02:00"
+    }
+}
+2026-06-10 11:22:57 [DEBUG] close.started
+2026-06-10 11:22:57 [DEBUG] close.complete
+2026-06-10 11:22:57 [INFO] Perhitungan premi berhasil
+2026-06-10 11:22:57 [DEBUG] Response sent
+2026-06-10 11:24:27 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x000002438AC60050>
+2026-06-10 11:24:27 [INFO] Processing request of type CallToolRequest
+2026-06-10 11:24:27 [DEBUG] Dispatching request of type CallToolRequest
+2026-06-10 11:24:27 [INFO] Request payload: {"benefits": ["flood-hurricane"], "pa_driver_price": 0, "pa_passenger_price": 0, "third_party_price": 0, "tipe_kendaraan": "non-bus-non-truck", "region": "region2", "harga_pasar": 300000000, "tipe_asuransi": "Comprehensive", "pilihan_rate": "atas", "kegunaan": "non-komersial"}
+2026-06-10 11:24:27 [DEBUG] connect_tcp.started host='localhost' port=8080 local_address=None timeout=10.0 socket_options=None
+2026-06-10 11:24:27 [DEBUG] connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000002438AC70410>
+2026-06-10 11:24:27 [DEBUG] send_request_headers.started request=<Request [b'POST']>
+2026-06-10 11:24:27 [DEBUG] send_request_headers.complete
+2026-06-10 11:24:27 [DEBUG] send_request_body.started request=<Request [b'POST']>
+2026-06-10 11:24:27 [DEBUG] send_request_body.complete
+2026-06-10 11:24:27 [DEBUG] receive_response_headers.started request=<Request [b'POST']>
+2026-06-10 11:24:27 [DEBUG] receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 04:24:27 GMT'), (b'Server', b'Apache/2.4.25 (Win32) OpenSSL/1.0.2j PHP/5.6.30'), (b'X-Powered-By', b'PHP/5.6.30'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'POST, OPTIONS'), (b'Access-Control-Allow-Headers', b'Content-Type'), (b'Content-Length', b'1525'), (b'Keep-Alive', b'timeout=5, max=100'), (b'Connection', b'Keep-Alive'), (b'Content-Type', b'application/json')])
+2026-06-10 11:24:27 [INFO] HTTP Request: POST http://localhost:8080/intraasia_new/api-simulasi-kendaraan.php "HTTP/1.1 200 OK"
+2026-06-10 11:24:27 [DEBUG] receive_response_body.started request=<Request [b'POST']>
+2026-06-10 11:24:27 [DEBUG] receive_response_body.complete
+2026-06-10 11:24:27 [DEBUG] response_closed.started
+2026-06-10 11:24:27 [DEBUG] response_closed.complete
+2026-06-10 11:24:27 [INFO] Response status: 200
+2026-06-10 11:24:27 [DEBUG] Response body: {
+    "success": true,
+    "input": {
+        "tipe_kendaraan": "non-bus-non-truck",
+        "tipe_kendaraan_label": "Non Bus & Non Truck",
+        "brand_kendaraan": "",
+        "tahun_kendaraan": "",
+        "kapasitas_penumpang": 0,
+        "region": "region2",
+        "region_label": "Region 2 (Jakarta, Banten, Jawa Barat)",
+        "kegunaan": "non-komersial",
+        "tipe_asuransi": "Comprehensive",
+        "pilihan_rate": "atas",
+        "harga_pasar": 300000000,
+        "pa_driver_price": 0,
+        "pa_passenger_price": 0,
+        "third_party_price": 0,
+        "benefits": [
+            "flood-hurricane"
+        ]
+    },
+    "result": {
+        "ojk_rate_pct": 2.29,
+        "premi_dasar": 6870000,
+        "surcharge_komersial": 0,
+        "benefit_rows": [
+            {
+                "id": "flood-hurricane",
+                "label": "Banjir, Angin Topan & Badai",
+                "rate": 0.1,
+                "formula": "0.1% × Rp 300.000.000",
+                "amount": 300000,
+                "note": "Risiko sendiri banjir: min. 10% dari nilai klaim, minimum Rp500.000 per kejadian (SE OJK No. 6\/2017)."
+            }
+        ],
+        "premi_benefit": 300000,
+        "biaya_admin": 0,
+        "total_premi": 7170000,
+        "total_premi_per": "tahun"
+    },
+    "meta": {
+        "referensi": "SE OJK No. 6\/SEOJK.05\/2017",
+        "catatan": "Estimasi indikatif. Premi final dapat berbeda sesuai survei dan kebijakan underwriting.",
+        "timestamp": "2026-06-10T06:24:27+02:00"
+    }
+}
+2026-06-10 11:24:27 [DEBUG] close.started
+2026-06-10 11:24:27 [DEBUG] close.complete
+2026-06-10 11:24:27 [INFO] Perhitungan premi berhasil
+2026-06-10 11:24:27 [DEBUG] Response sent
+2026-06-10 12:02:53 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-10 12:02:53 [DEBUG] Registering handler for ListToolsRequest
+2026-06-10 12:02:53 [DEBUG] Registering handler for CallToolRequest
+2026-06-10 12:02:53 [DEBUG] Using proactor: IocpProactor
+2026-06-10 12:02:53 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-10 12:02:53 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-10 12:02:53 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x0000017BDE179090>
+2026-06-10 12:02:53 [INFO] Processing request of type ListToolsRequest
+2026-06-10 12:02:53 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-10 12:02:53 [DEBUG] Response sent
+2026-06-10 15:23:44 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-10 15:23:44 [DEBUG] Registering handler for ListToolsRequest
+2026-06-10 15:23:44 [DEBUG] Registering handler for CallToolRequest
+2026-06-10 15:23:44 [DEBUG] Using proactor: IocpProactor
+2026-06-10 15:23:44 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-10 15:23:44 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-10 15:23:44 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x000002844B469090>
+2026-06-10 15:23:44 [INFO] Processing request of type ListToolsRequest
+2026-06-10 15:23:44 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-10 15:23:44 [DEBUG] Response sent
+2026-06-10 15:23:50 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-10 15:23:50 [DEBUG] Registering handler for ListToolsRequest
+2026-06-10 15:23:50 [DEBUG] Registering handler for CallToolRequest
+2026-06-10 15:23:50 [DEBUG] Using proactor: IocpProactor
+2026-06-10 15:23:50 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-10 15:23:50 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-10 15:23:50 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x000001F6B9259090>
+2026-06-10 15:23:50 [INFO] Processing request of type ListToolsRequest
+2026-06-10 15:23:50 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-10 15:23:50 [DEBUG] Response sent
+2026-06-10 21:09:39 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-10 21:09:39 [DEBUG] Registering handler for ListToolsRequest
+2026-06-10 21:09:39 [DEBUG] Registering handler for CallToolRequest
+2026-06-10 21:09:39 [DEBUG] Using proactor: IocpProactor
+2026-06-10 21:09:39 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-10 21:09:39 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-10 21:09:39 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x0000029BA3E19090>
+2026-06-10 21:09:39 [INFO] Processing request of type ListToolsRequest
+2026-06-10 21:09:39 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-10 21:09:39 [DEBUG] Response sent
+2026-06-11 08:20:30 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-11 08:20:30 [DEBUG] Registering handler for ListToolsRequest
+2026-06-11 08:20:30 [DEBUG] Registering handler for CallToolRequest
+2026-06-11 08:20:30 [DEBUG] Using proactor: IocpProactor
+2026-06-11 08:20:30 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-11 08:20:30 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-11 08:20:30 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x0000020ED8909090>
+2026-06-11 08:20:30 [INFO] Processing request of type ListToolsRequest
+2026-06-11 08:20:30 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-11 08:20:30 [DEBUG] Response sent
+2026-06-11 10:05:31 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-11 10:05:31 [DEBUG] Registering handler for ListToolsRequest
+2026-06-11 10:05:31 [DEBUG] Registering handler for CallToolRequest
+2026-06-11 10:05:31 [DEBUG] Using proactor: IocpProactor
+2026-06-11 10:05:31 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-11 10:05:31 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-11 10:05:31 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x000002432D7B9090>
+2026-06-11 10:05:31 [INFO] Processing request of type ListToolsRequest
+2026-06-11 10:05:31 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-11 10:05:31 [DEBUG] Response sent
+2026-06-12 08:19:35 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-12 08:19:35 [DEBUG] Registering handler for ListToolsRequest
+2026-06-12 08:19:35 [DEBUG] Registering handler for CallToolRequest
+2026-06-12 08:19:35 [DEBUG] Using proactor: IocpProactor
+2026-06-12 08:19:36 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-12 08:19:36 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-12 08:19:36 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x0000023D1E999090>
+2026-06-12 08:19:36 [INFO] Processing request of type ListToolsRequest
+2026-06-12 08:19:36 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-12 08:19:36 [DEBUG] Response sent
+2026-06-12 09:10:06 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-12 09:10:06 [DEBUG] Registering handler for ListToolsRequest
+2026-06-12 09:10:06 [DEBUG] Registering handler for CallToolRequest
+2026-06-12 09:10:06 [DEBUG] Using proactor: IocpProactor
+2026-06-12 09:10:06 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-12 09:10:06 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-12 09:10:06 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x00000230E9899090>
+2026-06-12 09:10:06 [INFO] Processing request of type ListToolsRequest
+2026-06-12 09:10:06 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-12 09:10:06 [DEBUG] Response sent
+2026-06-12 09:17:04 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-12 09:17:04 [DEBUG] Registering handler for ListToolsRequest
+2026-06-12 09:17:04 [DEBUG] Registering handler for CallToolRequest
+2026-06-12 09:17:04 [DEBUG] Using proactor: IocpProactor
+2026-06-12 09:17:04 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-12 09:17:04 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-12 09:17:04 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x000001DE15CE9090>
+2026-06-12 09:17:04 [INFO] Processing request of type ListToolsRequest
+2026-06-12 09:17:04 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-12 09:17:04 [DEBUG] Response sent
+2026-06-12 09:17:37 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-12 09:17:37 [DEBUG] Registering handler for ListToolsRequest
+2026-06-12 09:17:37 [DEBUG] Registering handler for CallToolRequest
+2026-06-12 09:17:37 [DEBUG] Using proactor: IocpProactor
+2026-06-12 09:17:37 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-12 09:17:37 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-12 09:17:37 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x000001E75F9A9090>
+2026-06-12 09:17:37 [INFO] Processing request of type ListToolsRequest
+2026-06-12 09:17:37 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-12 09:17:37 [DEBUG] Response sent
