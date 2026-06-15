@@ -511,5 +511,7 @@ async def tools_call_endpoint(request: Request) -> JSONResponse:
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "8000"))
+    mcp.settings.host = "0.0.0.0"
+    mcp.settings.port = port
     logger.info(f"Starting premi-asuransi MCP HTTP server on port {port} (log: {LOG_FILE})")
-    mcp.run(transport="sse", host="0.0.0.0", port=port)
+    mcp.run(transport="sse")
