@@ -1,16 +1,27 @@
-# API Simulasi Premi Kendaraan — PHP built-in server di port 1234.
-# (premi.py adalah MCP server berbasis stdio — tidak mendengarkan port,
-#  jadi yang dikontainerkan & diekspos di port 1234 adalah PHP API-nya.)
-FROM php:8.3-cli-alpine
+FROM python:3.13-slim
+
+# Install PHP CLI for the internal pricing-API backend
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends php-cli \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Hanya butuh file API + router (tidak ada dependency eksternal / DB).
+# Python dependencies — separate layer for better cache reuse
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# PHP API backend files
 COPY api-simulasi-kendaraan.php router.php ./
-# Sertakan juga spec/docs supaya bisa diakses bila diperlukan.
+
+# Documentation (served as static files via router.php)
 COPY api-simulasi-kendaraan.yaml api-simulasi-kendaraan.md ./
 
-EXPOSE 1234
+# MCP server + entrypoint
+COPY mcp-simulasi.py entrypoint.sh ./
+RUN chmod +x entrypoint.sh
 
-# Jalankan PHP built-in web server dengan router.
-CMD ["php", "-S", "0.0.0.0:1234", "router.php"]
+# MCP HTTP server (SSE transport)
+EXPOSE 8000
+
+ENTRYPOINT ["./entrypoint.sh"]

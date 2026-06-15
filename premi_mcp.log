@@ -254,3 +254,90 @@
 2026-06-12 09:17:37 [INFO] Processing request of type ListToolsRequest
 2026-06-12 09:17:37 [DEBUG] Dispatching request of type ListToolsRequest
 2026-06-12 09:17:37 [DEBUG] Response sent
+2026-06-15 08:18:56 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-15 08:18:56 [DEBUG] Registering handler for ListToolsRequest
+2026-06-15 08:18:56 [DEBUG] Registering handler for CallToolRequest
+2026-06-15 08:18:56 [DEBUG] Using proactor: IocpProactor
+2026-06-15 08:18:56 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-15 08:18:56 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-15 08:18:56 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x0000020DB5C79090>
+2026-06-15 08:18:56 [INFO] Processing request of type ListToolsRequest
+2026-06-15 08:18:56 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-15 08:18:56 [DEBUG] Response sent
+2026-06-15 11:17:32 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x0000020DB5C78690>
+2026-06-15 11:17:32 [INFO] Processing request of type CallToolRequest
+2026-06-15 11:17:32 [DEBUG] Dispatching request of type CallToolRequest
+2026-06-15 11:17:32 [INFO] Request payload: {"benefits": [], "pa_driver_price": 0, "pa_passenger_price": 0, "third_party_price": 0, "tipe_kendaraan": "non-bus-non-truck", "region": "region2", "harga_pasar": 250000000, "tipe_asuransi": "TLO", "pilihan_rate": "bawah", "kegunaan": "non-komersial"}
+2026-06-15 11:17:33 [DEBUG] connect_tcp.started host='localhost' port=8080 local_address=None timeout=10.0 socket_options=None
+2026-06-15 11:17:33 [DEBUG] connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000020DB5CB3CB0>
+2026-06-15 11:17:33 [DEBUG] send_request_headers.started request=<Request [b'POST']>
+2026-06-15 11:17:33 [DEBUG] send_request_headers.complete
+2026-06-15 11:17:33 [DEBUG] send_request_body.started request=<Request [b'POST']>
+2026-06-15 11:17:33 [DEBUG] send_request_body.complete
+2026-06-15 11:17:33 [DEBUG] receive_response_headers.started request=<Request [b'POST']>
+2026-06-15 11:17:33 [DEBUG] receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 15 Jun 2026 04:17:33 GMT'), (b'Server', b'Apache/2.4.25 (Win32) OpenSSL/1.0.2j PHP/5.6.30'), (b'X-Powered-By', b'PHP/5.6.30'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'POST, OPTIONS'), (b'Access-Control-Allow-Headers', b'Content-Type'), (b'Content-Length', b'1091'), (b'Keep-Alive', b'timeout=5, max=100'), (b'Connection', b'Keep-Alive'), (b'Content-Type', b'application/json')])
+2026-06-15 11:17:33 [INFO] HTTP Request: POST http://localhost:8080/intraasia_new/api-simulasi-kendaraan.php "HTTP/1.1 200 OK"
+2026-06-15 11:17:33 [DEBUG] receive_response_body.started request=<Request [b'POST']>
+2026-06-15 11:17:33 [DEBUG] receive_response_body.complete
+2026-06-15 11:17:33 [DEBUG] response_closed.started
+2026-06-15 11:17:33 [DEBUG] response_closed.complete
+2026-06-15 11:17:33 [INFO] Response status: 200
+2026-06-15 11:17:33 [DEBUG] Response body: {
+    "success": true,
+    "input": {
+        "tipe_kendaraan": "non-bus-non-truck",
+        "tipe_kendaraan_label": "Non Bus & Non Truck",
+        "brand_kendaraan": "",
+        "tahun_kendaraan": "",
+        "kapasitas_penumpang": 0,
+        "region": "region2",
+        "region_label": "Region 2 (Jakarta, Banten, Jawa Barat)",
+        "kegunaan": "non-komersial",
+        "tipe_asuransi": "TLO",
+        "pilihan_rate": "bawah",
+        "harga_pasar": 250000000,
+        "pa_driver_price": 0,
+        "pa_passenger_price": 0,
+        "third_party_price": 0,
+        "benefits": []
+    },
+    "result": {
+        "ojk_rate_pct": 0.38,
+        "premi_dasar": 950000,
+        "surcharge_komersial": 0,
+        "benefit_rows": [],
+        "premi_benefit": 0,
+        "biaya_admin": 0,
+        "total_premi": 950000,
+        "total_premi_per": "tahun"
+    },
+    "meta": {
+        "referensi": "SE OJK No. 6\/SEOJK.05\/2017",
+        "catatan": "Estimasi indikatif. Premi final dapat berbeda sesuai survei dan kebijakan underwriting.",
+        "timestamp": "2026-06-15T06:17:33+02:00"
+    }
+}
+2026-06-15 11:17:33 [DEBUG] close.started
+2026-06-15 11:17:33 [DEBUG] close.complete
+2026-06-15 11:17:33 [INFO] Perhitungan premi berhasil
+2026-06-15 11:17:33 [DEBUG] Response sent
+2026-06-15 12:04:49 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-15 12:04:49 [DEBUG] Registering handler for ListToolsRequest
+2026-06-15 12:04:49 [DEBUG] Registering handler for CallToolRequest
+2026-06-15 12:04:49 [DEBUG] Using proactor: IocpProactor
+2026-06-15 12:04:49 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-15 12:04:49 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-15 12:04:49 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x00000255E74E9090>
+2026-06-15 12:04:49 [INFO] Processing request of type ListToolsRequest
+2026-06-15 12:04:49 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-15 12:04:49 [DEBUG] Response sent
+2026-06-15 12:05:38 [DEBUG] Initializing server 'premi-asuransi'
+2026-06-15 12:05:38 [DEBUG] Registering handler for ListToolsRequest
+2026-06-15 12:05:38 [DEBUG] Registering handler for CallToolRequest
+2026-06-15 12:05:38 [DEBUG] Using proactor: IocpProactor
+2026-06-15 12:05:38 [INFO] MCP Server premi-asuransi starting... (log: C:\Users\raihan\Desktop\MCP\premi_mcp.log)
+2026-06-15 12:05:38 [DEBUG] Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2026-06-15 12:05:38 [DEBUG] Received message: <mcp.shared.session.RequestResponder object at 0x0000019C70149090>
+2026-06-15 12:05:38 [INFO] Processing request of type ListToolsRequest
+2026-06-15 12:05:38 [DEBUG] Dispatching request of type ListToolsRequest
+2026-06-15 12:05:38 [DEBUG] Response sent

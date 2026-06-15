@@ -1,3 +1,8 @@
 .git
 *.log
+__pycache__
+*.pyc
+*.pyo
 premi.py
+test_mcp_simulasi.py
+.pytest_cache
