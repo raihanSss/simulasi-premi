@@ -135,6 +135,32 @@ _PRIVAS_TOOLS = [
             "comprehensive",
             "ojk",
         ],
+        # Display contract for the Privas chat result card: per result field
+        # (from _build_result_dict below) — label + format so the card renders
+        # with our own labels/units, no guessing on the platform side.
+        # format ∈ {currency, percent, number, relative, text}; empty_text shows
+        # a natural-language note instead of hiding an empty value; hidden=true
+        # excludes a non-scalar field from the card (still in the raw dump).
+        "output_fields": {
+            "tipe_kendaraan": {"label": "Tipe Kendaraan", "format": "text"},
+            "region": {"label": "Wilayah", "format": "text"},
+            "kegunaan": {"label": "Kegunaan", "format": "text"},
+            "tipe_asuransi": {"label": "Tipe Asuransi", "format": "text"},
+            "harga_pasar": {"label": "Harga Pasar Kendaraan", "format": "currency"},
+            "ojk_rate_pct": {"label": "Rate OJK", "format": "percent"},
+            "premi_dasar": {"label": "Premi Dasar", "format": "currency"},
+            "surcharge_komersial": {"label": "Surcharge Komersial", "format": "currency"},
+            "premi_benefit": {"label": "Premi Benefit", "format": "currency"},
+            "biaya_admin": {"label": "Biaya Admin", "format": "currency"},
+            "total_premi": {"label": "Total Premi", "format": "currency"},
+            "total_premi_per": {"label": "Periode Premi", "format": "text"},
+            # Array of benefit objects {id,label,rate,formula,amount,note} — not a
+            # scalar, so keep it out of the summary card (visible in the raw dump
+            # and already enumerated in the AI's prose answer).
+            "benefit_rows": {"label": "Rincian Benefit", "hidden": True},
+            "referensi": {"label": "Referensi", "format": "text"},
+            "catatan": {"label": "Catatan", "format": "text"},
+        },
         "trigger_intent": "simulasi_premi_kendaraan",
         "version": "2.0",
     }

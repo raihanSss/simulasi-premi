@@ -61,6 +61,22 @@ Calculates vehicle insurance premium based on OJK tariff tables.
 | `pa_passenger_price` | number | `0` | Personal accident passenger coverage per seat (IDR) |
 | `third_party_price` | number | `0` | Third-party liability coverage (IDR) |
 
+**Result display metadata (`output_fields`):**
+
+`GET /tools` also returns an `output_fields` map so the Privas chat result card renders each
+result field with the right label/format — the platform does no per-tool guessing. Keep it in sync
+with the keys returned by `_build_result_dict`.
+
+| Key in `output_fields` | Meaning |
+|---|---|
+| `label` | Display label for the field |
+| `format` | `currency` (IDR) \| `percent` \| `number` \| `relative` (time) \| `text` |
+| `empty_text` | Note shown instead of hiding the row when the value is empty |
+| `hidden` | `true` to keep a non-scalar field (e.g. `benefit_rows`, an array of objects) out of the summary card — it still appears in the card's "Detail Tool" raw dump |
+
+Here `harga_pasar`/`premi_*`/`total_premi`/`biaya_admin`/`surcharge_komersial` use `currency`,
+`ojk_rate_pct` uses `percent`, and `benefit_rows` is `hidden`.
+
 ## Environment Variables
 
 | Variable | Default | Description |
